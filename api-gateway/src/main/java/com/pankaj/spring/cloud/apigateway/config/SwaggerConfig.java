@@ -21,6 +21,7 @@ public class SwaggerConfig  implements SwaggerResourcesProvider {
 		List<SwaggerResource> resources = new ArrayList<>();
 		resources.add(swaggerResource("book-service", "/book-service/v2/api-docs", "2.0"));
 		resources.add(swaggerResource("rating-service", "/rating-service/v2/api-docs", "2.0"));
+		resources.add(swaggerResource("api-gateway", "/v2/api-docs", "2.0"));
 		return resources;
 	}
 	  
