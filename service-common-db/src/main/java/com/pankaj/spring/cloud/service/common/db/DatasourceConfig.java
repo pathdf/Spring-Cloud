@@ -29,10 +29,10 @@ public class DatasourceConfig{
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("${db.classname}");
-		dataSource.setUrl("${db.url}");
-		dataSource.setUsername("${db.username}");
-		dataSource.setPassword("${db.password}");
+		dataSource.setDriverClassName("${spring.datasource.driver-class-name}");
+		dataSource.setUrl("${spring.datasource.url}");
+		dataSource.setUsername("${spring.datasource.username}");
+		dataSource.setPassword("${spring.datasource.password}");
 		return dataSource;
 	}
 
