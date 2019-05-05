@@ -1,4 +1,4 @@
-package com.pankaj.spring.cloud.apigateway.config;
+package com.pankaj.spring.cloud.service.common.db;
 
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -23,16 +23,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("${basepackage}")
+@EnableJpaRepositories("${repository.basepackage}")
 public class DatasourceConfig{
 
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/spring_jwt_db");
-		dataSource.setUsername("pankaj");
-		dataSource.setPassword("pankaj123");
+		dataSource.setDriverClassName("${db.classname}");
+		dataSource.setUrl("${db.url}");
+		dataSource.setUsername("${db.username}");
+		dataSource.setPassword("${db.password}");
 		return dataSource;
 	}
 
@@ -56,7 +56,7 @@ public class DatasourceConfig{
 			throws PropertyVetoException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactory.setDataSource(ds);
-		entityManagerFactory.setPackagesToScan(new String[] { "com.pankaj.spring.cloud.apigateway.domain" });
+		entityManagerFactory.setPackagesToScan(new String[] { "${entity.basepackage}" });
 		JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
 		entityManagerFactory.setJpaProperties(hibernateProperties());

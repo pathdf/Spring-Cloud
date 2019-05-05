@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,4 +89,18 @@ public class UserController {
 		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "To sign up the user", response = HttpStatus.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully saved user"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+	//@RequestMapping(value="/signup", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('')")
+	@PostMapping("/signup2")
+	public ResponseEntity<?> signup2(@RequestBody LoginUser loginUser){
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
 }
