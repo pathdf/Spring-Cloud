@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,14 +26,29 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories("${repository.basepackage}")
 public class DatasourceConfig{
+	
+	@Value("${spring.datasource.driver-class-name}")
+	private String driveClassName;
+	
+	@Value("${spring.datasource.url}")
+	private String url;
+	
+	@Value("${spring.datasource.username}")
+	private String username;
+	
+	@Value("${spring.datasource.password}")
+	private String password;
+	
+	@Value("${entity.basepackage}")
+	private String entityBasePackage;
 
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("${spring.datasource.driver-class-name}");
-		dataSource.setUrl("${spring.datasource.url}");
-		dataSource.setUsername("${spring.datasource.username}");
-		dataSource.setPassword("${spring.datasource.password}");
+		dataSource.setDriverClassName(driveClassName);
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
 
@@ -56,7 +72,7 @@ public class DatasourceConfig{
 			throws PropertyVetoException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactory.setDataSource(ds);
-		entityManagerFactory.setPackagesToScan(new String[] { "${entity.basepackage}" });
+		entityManagerFactory.setPackagesToScan(new String[] { entityBasePackage });
 		JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
 		entityManagerFactory.setJpaProperties(hibernateProperties());

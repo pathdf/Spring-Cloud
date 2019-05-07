@@ -1,4 +1,4 @@
-package com.pankaj.spring.cloud.apigateway.dto;
+package com.pankaj.spring.cloud.dto;
 
 import java.util.List;
 

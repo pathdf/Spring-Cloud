@@ -13,7 +13,7 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Component
 @Primary
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration
 public class SwaggerConfig  implements SwaggerResourcesProvider {
 
 	
@@ -22,7 +22,7 @@ public class SwaggerConfig  implements SwaggerResourcesProvider {
 		List<SwaggerResource> resources = new ArrayList<>();
 		resources.add(swaggerResource("book-service", "/book-service/v2/api-docs", "2.0"));
 		resources.add(swaggerResource("rating-service", "/rating-service/v2/api-docs", "2.0"));
-		resources.add(swaggerResource("api-gateway", "/v2/api-docs", "2.0"));
+		resources.add(swaggerResource("user-service", "/user-service/v2/api-docs", "2.0"));
 		return resources;
 	}
 	  

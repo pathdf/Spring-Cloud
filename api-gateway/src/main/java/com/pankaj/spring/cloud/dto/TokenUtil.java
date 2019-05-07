@@ -1,15 +1,11 @@
-package com.pankaj.spring.cloud.apigateway.util;
+package com.pankaj.spring.cloud.dto;
 
 import java.util.Base64;
 
-import net.minidev.json.JSONValue;
-
-import org.codehaus.jettison.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pankaj.spring.cloud.apigateway.dto.TokenDTO;
 
 public class TokenUtil {
 
@@ -36,7 +32,7 @@ public class TokenUtil {
 		try {
 			String decodedToken = new String(Base64.getDecoder().decode(token));
 
-			JSONObject obj = (JSONObject) JSONValue.parse(decodedToken);
+			JSONObject obj = (JSONObject) org.json.simple.JSONValue.parse(decodedToken);
 
 			ObjectMapper mapper = new ObjectMapper();
 

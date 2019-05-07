@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pankaj.spring.cloud.bookservice.Book;
+import com.pankaj.spring.cloud.common.auth.BaseAuthController;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/api/protected/book")
+public class BookController extends BaseAuthController {
 
 	private List<Book> bookList = Arrays.asList(new Book(1L, "Baeldung goes to the market", "Tim Schimandle"),
 			new Book(2L, "Baeldung goes to the park", "Slavisa"));
